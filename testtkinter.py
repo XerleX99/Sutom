@@ -4,8 +4,10 @@ from tkinter import ttk
 
 window = tk.Tk()
 
-window.winfo_reqwidth()
+
 window.bind('<Escape>',lambda e: window.destroy())
+
+
 
 window.geometry("1400x600")
 lettres = ["a","b","c","d","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
@@ -263,12 +265,136 @@ def LetterPos():
             entry9.place(x=1207,y= 100)
             entry10.place(x=1357,y= 100)
 
-def toggle():
-    print(toggle_btn.config('relief')[-1])
-    if toggle_btn.config('relief')[-1] == 'sunken':
-        toggle_btn.config(relief="raised")
-    else:
-        toggle_btn.config(relief="sunken")
+def A():    
+  if btnA.config('relief')[-1] == 'sunken':
+    btnA.config(relief='raised')
+  else:
+    btnA.config(relief='sunken')
+def B():
+  if btnB.config('relief')[-1] == 'sunken':
+    btnB.config(relief='raised')
+  else:
+    btnB.config(relief='sunken')
+def C():
+  if btnC.config('relief')[-1] == 'sunken':
+    btnC.config(relief='raised')
+  else:
+    btnC.config(relief='sunken')
+def D():
+  if btnD.config('relief')[-1] == 'sunken':
+    btnD.config(relief='raised')
+  else:
+    btnD.config(relief='sunken')
+def E():
+  if btnE.config('relief')[-1] == 'sunken':
+    btnE.config(relief='raised')
+  else:
+    btnE.config(relief='sunken')
+def F():
+  if btnF.config('relief')[-1] == 'sunken':
+    btnF.config(relief='raised')
+  else:
+    btnF.config(relief='sunken')
+def G():
+  if btnG.config('relief')[-1] == 'sunken':
+    btnG.config(relief='raised')
+  else:
+    btnG.config(relief='sunken')
+def H():
+  if btnH.config('relief')[-1] == 'sunken':
+    btnH.config(relief='raised')
+  else:
+    btnH.config(relief='sunken')
+def I():
+  if btnI.config('relief')[-1] == 'sunken':
+    btnI.config(relief='raised')
+  else:
+    btnI.config(relief='sunken')
+def J():
+  if btnJ.config('relief')[-1] == 'sunken':
+    btnJ.config(relief='raised')
+  else:
+    btnJ.config(relief='sunken')
+def K():
+  if btnK.config('relief')[-1] == 'sunken':
+    btnK.config(relief='raised')
+  else:
+    btnK.config(relief='sunken')
+def L():
+  if btnL.config('relief')[-1] == 'sunken':
+    btnL.config(relief='raised')
+  else:
+    btnL.config(relief='sunken')
+def M():
+  if btnM.config('relief')[-1] == 'sunken':
+    btnM.config(relief='raised')
+  else:
+    btnM.config(relief='sunken')
+def N():
+  if btnN.config('relief')[-1] == 'sunken':
+    btnN.config(relief='raised')
+  else:
+    btnN.config(relief='sunken')
+def O():
+  if btnO.config('relief')[-1] == 'sunken':
+    btnO.config(relief='raised')
+  else:
+    btnO.config(relief='sunken')
+def P():
+  if btnP.config('relief')[-1] == 'sunken':
+    btnP.config(relief='raised')
+  else:
+    btnP.config(relief='sunken')
+def Q():
+  if btnQ.config('relief')[-1] == 'sunken':
+    btnQ.config(relief='raised')
+  else:
+    btnQ.config(relief='sunken')
+def R():
+  if btnR.config('relief')[-1] == 'sunken':
+    btnR.config(relief='raised')
+  else:
+    btnR.config(relief='sunken')
+def S():
+  if btnS.config('relief')[-1] == 'sunken':
+    btnS.config(relief='raised')
+  else:
+    btnS.config(relief='sunken')
+def T():
+  if btnT.config('relief')[-1] == 'sunken':
+    btnT.config(relief='raised')
+  else:
+    btnT.config(relief='sunken')
+def U():
+  if btnU.config('relief')[-1] == 'sunken':
+    btnU.config(relief='raised')
+  else:
+    btnU.config(relief='sunken')
+def V():
+  if btnV.config('relief')[-1] == 'sunken':
+    btnV.config(relief='raised')
+  else:
+    btnV.config(relief='sunken')
+def W():
+  if btnW.config('relief')[-1] == 'sunken':
+    btnW.config(relief='raised')
+  else:
+    btnW.config(relief='sunken')
+def X():
+  if btnX.config('relief')[-1] == 'sunken':
+    btnX.config(relief='raised')
+  else:
+    btnX.config(relief='sunken')
+def Y():
+  if btnY.config('relief')[-1] == 'sunken':
+    btnY.config(relief='raised')
+  else:
+    btnY.config(relief='sunken')
+def Z():
+  if btnZ.config('relief')[-1] == 'sunken':
+    btnZ.config(relief='raised')
+  else:
+    btnZ.config(relief='sunken')
             
 def test():
     print("ca marche")
@@ -286,36 +412,64 @@ tk.Label(window,text="Entrer les lettres mal placés aux endroits où on sais qu
 
 tk.Label(window,text="Selectionner les lettres impossibles :").place(x=0,y=125)
 
-toggle_btn = tk.Button(window,text="Toggle", width=12, relief="raised")
-toggle_btn.place(x=20,y=150)
+btnA = tk.Button(window,text='A',command=A,relief='raised',width=1,height=1)
+btnA.place(x=30,y=175)
+btnZ = tk.Button(window,text='Z',command=Z,relief='raised',width=1,height=1)
+btnZ.place(x=55,y=175)
+btnE = tk.Button(window,text='E',command=E,relief='raised',width=1,height=1)
+btnE.place(x=80,y=175)
+btnR = tk.Button(window,text='R',command=R,relief='raised',width=1,height=1)
+btnR.place(x=105,y=175)
+btnT = tk.Button(window,text='T',command=T,relief='raised',width=1,height=1)
+btnT.place(x=130,y=175)
+btnY = tk.Button(window,text='Y',command=Y,relief='raised',width=1,height=1)
+btnY.place(x=155,y=175)
+btnU = tk.Button(window,text='U',command=U,relief='raised',width=1,height=1)
+btnU.place(x=180,y=175)
+btnI = tk.Button(window,text='I',command=I,relief='raised',width=1,height=1)
+btnI.place(x=205,y=175)
+btnO = tk.Button(window,text='O',command=O,relief='raised',width=1,height=1)
+btnO.place(x=230,y=175)
+btnP = tk.Button(window,text='P',command=P,relief='raised',width=1,height=1)
+btnP.place(x=255,y=175)
+btnQ = tk.Button(window,text='Q',command=Q,relief='raised',width=1,height=1)
+btnQ.place(x=35,y=210)
+btnS = tk.Button(window,text='S',command=S,relief='raised',width=1,height=1)
+btnS.place(x=60,y=210)
+btnD = tk.Button(window,text='D',command=D,relief='raised',width=1,height=1)
+btnD.place(x=85,y=210)
+btnF = tk.Button(window,text='F',command=F,relief='raised',width=1,height=1)
+btnF.place(x=110,y=210)
+btnG = tk.Button(window,text='G',command=G,relief='raised',width=1,height=1)
+btnG.place(x=135,y=210)
+btnH = tk.Button(window,text='H',command=H,relief='raised',width=1,height=1)
+btnH.place(x=160,y=210)
+btnJ = tk.Button(window,text='J',command=J,relief='raised',width=1,height=1)
+btnJ.place(x=185,y=210)
+btnK = tk.Button(window,text='K',command=K,relief='raised',width=1,height=1)
+btnK.place(x=210,y=210)
+btnL = tk.Button(window,text='L',command=L,relief='raised',width=1,height=1)
+btnL.place(x=235,y=210)
+btnM = tk.Button(window,text='M',command=M,relief='raised',width=1,height=1)
+btnM.place(x=260,y=210)
+btnW = tk.Button(window,text='W',command=W,relief='raised',width=1,height=1)
+btnW.place(x=75,y=245)
+btnX = tk.Button(window,text='X',command=X,relief='raised',width=1,height=1)
+btnX.place(x=100,y=245)
+btnC = tk.Button(window,text='C',command=C,relief='raised',width=1,height=1)
+btnC.place(x=125,y=245)
+btnV = tk.Button(window,text='V',command=V,relief='raised',width=1,height=1)
+btnV.place(x=150,y=245)
+btnB = tk.Button(window,text='B',command=B,relief='raised',width=1,height=1)
+btnB.place(x=175,y=245)
+btnN = tk.Button(window,text='N',command=N,relief='raised',width=1,height=1)
+btnN.place(x=200,y=245)
 
-tk.Button(window,text="A",command=test).place(x=0,y=175)
-# tk.Button(window,text="Z").grid(row = 7,column = 1,padx = 50,pady = 20)
-# tk.Button(window,text="E").grid(row = 7,column = 2,padx = 50,pady = 20)
-# tk.Button(window,text="R").grid(row = 7,column = 3,padx = 50,pady = 20)
-# tk.Button(window,text="T").grid(row = 7,column = 4,padx = 50,pady = 20)
-# tk.Button(window,text="Y").grid(row = 7,column = 5,padx = 50,pady = 20)
-# tk.Button(window,text="U").grid(row = 7,column = 6,padx = 50,pady = 20)
-# tk.Button(window,text="I").grid(row = 7,column = 7,padx = 50,pady = 20)
-# tk.Button(window,text="O").grid(row = 7,column = 8,padx = 50,pady = 20)
-# tk.Button(window,text="P").grid(row = 7,column = 9,padx = 50,pady = 20)
+tk.Label( window, text='Possible solution of the word : ').place(x=5,y=290)
 
-# tk.Button(window,text="Q").grid(row = 8,column = 0,padx = 50,pady = 20)
-# tk.Button(window,text="S").grid(row = 8,column = 1,padx = 50,pady = 20)
-# tk.Button(window,text="D").grid(row = 8,column = 2,padx = 50,pady = 20)
-# tk.Button(window,text="F").grid(row = 8,column = 3,padx = 50,pady = 20)
-# tk.Button(window,text="G").grid(row = 8,column = 4,padx = 50,pady = 20)
-# tk.Button(window,text="H").grid(row = 8,column = 5,padx = 50,pady = 20)
-# tk.Button(window,text="J").grid(row = 8,column = 6,padx = 50,pady = 20)
-# tk.Button(window,text="K").grid(row = 8,column = 7,padx = 50,pady = 20)
-# tk.Button(window,text="L").grid(row = 8,column = 8,padx = 50,pady = 20)
-# tk.Button(window,text="M").grid(row = 8,column = 9,padx = 50,pady = 20)
-
-# tk.Button(window,text="W").grid(row = 9,column = 1,padx = 50,pady = 20)
-# tk.Button(window,text="X").grid(row = 9,column = 2,padx = 50,pady = 20)
-# tk.Button(window,text="C").grid(row = 9,column = 3,padx = 50,pady = 20)
-# tk.Button(window,text="V").grid(row = 9,column = 4,padx = 50,pady = 20)
-# tk.Button(window,text="B").grid(row = 9,column = 5,padx = 50,pady = 20)
-# tk.Button(window,text="N").grid(row = 9,column = 6,padx = 50,pady = 20)
+var = tk.StringVar()
+var =""
+Resultlab = tk.Label( window, text=var,width=60,height=15,relief='ridge')
+Resultlab.place(x=5,y=320)
 
 window.mainloop()
