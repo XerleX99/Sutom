@@ -1,9 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
+import pandas as pd
 
 
 window = tk.Tk()
 
+numletword = tk.StringVar()
+var = tk.StringVar()
 
 window.bind('<Escape>',lambda e: window.destroy())
 
@@ -397,9 +400,55 @@ def Z():
     btnZ.config(relief='raised')
   else:
     btnZ.config(relief='sunken')
+
+def LconBienPlace(data,couples : list):
+    for word in data["word"] :
+        keep = True
+        for x,y in couples :
+            if word[int(y)-1] != x :
+                keep = False
+                break
+        if keep :
+            motEligible1.append(word)
+    
+def LconMalPLace(couples : list):
+    for word in motEligible1 :
+        keep = True
+        for i,j,k in couples :
+            if word.count(i) < int(k) :
+                keep = False
+            if word[int(j)-1] == i :
+                keep = False
+        if keep is True :
+            motEligible2.append(word)
+
+def LconImpossible(couples : list):
+    for word in motEligible2 :
+        keep = True
+        for l in couples :
+            if word.count(l) != 0 :
+                keep = False
+        if keep is True:
+            motEligible3.append(word)
             
 def search():
-  pass
+  data = openfile()
+  
+  motEligible1 = []
+  motEligible2 = []
+  motEligible3 = []
+  goodlettres = []
+  semigoodlettres = []
+  badlettres = []
+
+def openfile():
+  Flettre = spbox1.get()
+  classer = str (Flettre)+(" classed.xlsx")
+  page = str (Flettre)+(" words")+numletword
+  df = pd.read_excel(classer,str(page))
+  return df
+
+
 
 tk.Label(window,text="Nombre de lettre du mot :").place(x = 0,y= 5)
 
