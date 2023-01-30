@@ -2,15 +2,16 @@ import tkinter as tk
 from tkinter import ttk
 import pandas as pd
 
-
 window = tk.Tk()
 
-numletword = tk.StringVar()
-var = tk.StringVar()
+dico1 = {}
+dico2 = {}
+
 
 window.bind('<Escape>',lambda e: window.destroy())
 window.title("Sutom Solver")
 
+window.attributes('-topmost', True)
 
 
 window.geometry("650x560")
@@ -56,22 +57,24 @@ ListSpBox2 = [spbox11,spbox12,spbox13]
 ListSpBox3 = [spbox14,spbox15,spbox16]
 
 def LetterPos():
-    numletword = example.get()
-    if numletword in numbers10str :
-      numletword = int(numletword)
-      if numletword in numbers10 :
-        xsp = 3
-        ysp = 50
-        xent = 3
-        yent = 100
-        for i in range(0,numletword) :
-          ListSpBox[i].place(x=xsp,y=ysp)
-          ListEntry[i].place(x=xent,y=yent)
-          xsp += 50
-          xent += 50
-        for i in range (numletword,10):
-          ListSpBox[i].place_forget()
-          ListEntry[i].place_forget()
+  global numletword
+  global numletwordint
+  numletword = example.get()
+  if numletword in numbers10str :
+    numletwordint = int(numletword)
+    if numletwordint in numbers10 :
+      xsp = 3
+      ysp = 50
+      xent = 3
+      yent = 100
+      for i in range(0,numletwordint) :
+        ListSpBox[i].place(x=xsp,y=ysp)
+        ListEntry[i].place(x=xent,y=yent)
+        xsp += 50
+        xent += 50
+      for i in range (numletwordint,10):
+        ListSpBox[i].place_forget()
+        ListEntry[i].place_forget()
 
 def buttons(bouton : tk.Button):
   if bouton.config('relief')[-1] == 'sunken':
@@ -97,50 +100,76 @@ def validate():
 
 
 
-def LconBienPlace(data,couples : list):
-    for word in data["word"] :
-        keep = True
-        for x,y in couples :
-            if word[int(y)-1] != x :
-                keep = False
-                break
-        if keep :
-            motEligible1.append(word)
+def LconBienPlace(data,motEligible1 : list):
+  global numletwordint
+  global dico1
+  for i in range (0,numletwordint):
+    dico1[i] = ListSpBox[i].get()
+  for word in data["word"] :
+      keep = True
+      for j in dico1 :
+        if dico1[j] in lettres :
+          if word[j] != dico1[j] :
+              keep = False
+              break
+      if keep :
+          motEligible1.append(word)
     
-def LconMalPLace(couples : list):
-    for word in motEligible1 :
-        keep = True
-        for i,j,k in couples :
-            if word.count(i) < int(k) :
-                keep = False
-            if word[int(j)-1] == i :
-                keep = False
-        if keep is True :
-            motEligible2.append(word)
+def LconMalPLace(motEligible1 : list, motEligible2 : list): #TODO vérifier que les lettres mal placer sont comprises dans le mot
+  global numletwordint
+  global dico2
+  for i in range (0,numletwordint):
+    dico2[i] = ListEntry[i].get()
+  for word in motEligible1 :
+    keep = True
+    for i in range(0,len(word)):
+      for j in dico2[i]:
+        if j == word[i]:
+          keep = False
+    if keep :
+      motEligible2.append(word)
 
-def LconImpossible(couples : list):
-    for word in motEligible2 :
-        keep = True
-        for l in couples :
-            if word.count(l) != 0 :
-                keep = False
-        if keep is True:
-            motEligible3.append(word)
-            
+def getbadlet():
+  btndown = []
+  for btn in ListBoutonLettre :
+    if btn.config('relief')[-1] == 'sunken' :
+      btndown.append(btn['text'].lower())
+  return btndown
+
+def LconImpossible(motEligible2 : list, motEligible3 : list):
+  letImpo = getbadlet()
+  print('letimpo :',letImpo)
+  for word in motEligible2 :
+    keep = True
+    for let in letImpo:
+      if word.count(let) > 0 :
+        keep = False
+    if keep :
+      motEligible3.append(word)
+
+
 def search():
-  data = openfile()
-  
   motEligible1 = []
   motEligible2 = []
   motEligible3 = []
   goodlettres = []
   semigoodlettres = []
   badlettres = []
+  data = openfile()
+  LconBienPlace(data,motEligible1)
+  LconMalPLace(motEligible1,motEligible2)
+  LconImpossible(motEligible2,motEligible3)
+  print('list mot 1 :',motEligible1)
+  print('list mot 2 :',motEligible2)
+  print('list mot 3 :',motEligible3)
+  x = ', '.join(motEligible3)
+  Resultlab.config(text=x)
+  
 
 def openfile():
   Flettre = spbox1.get()
   classer = str (Flettre)+(" classed.xlsx")
-  page = str (Flettre)+(" words")+numletword
+  page = str (Flettre)+(" words")+str(numletword)
   df = pd.read_excel(classer,str(page))
   return df
 
@@ -212,6 +241,8 @@ btnB.place(x=150,y=230)
 btnN = tk.Button(window,text='N',command=lambda:buttons(btnN),relief='raised',width=1,height=1)
 btnN.place(x=175,y=230)
 
+ListBoutonLettre = [btnA,btnZ,btnE,btnR,btnT,btnY,btnU,btnI,btnO,btnP,btnQ,btnS,btnD,btnF,btnG,btnH,btnJ,btnK,btnL,btnM,btnW,btnX,btnC,btnV,btnB,btnN]
+
 tk.Label( window, text='Nombre de lettre en double (ou plus) :').place(x=300,y=125)
 
 multipleLettres = [1,2,3]
@@ -226,8 +257,9 @@ tk.Label( window, text='Possible solution of the word : ').place(x=5,y=290)
 
 
 
-var =""
-Resultlab = tk.Label( window, text=var,width=90,height=15,relief='ridge')
+Resultlab = tk.Label( window, text="",width=90,height=15,relief='ridge',wraplengt=600)
 Resultlab.place(x=5,y=320)
+
+
 
 window.mainloop()
