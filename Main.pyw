@@ -2,6 +2,10 @@ import tkinter as tk
 from tkinter import ttk
 import tkinter.scrolledtext as st
 import pandas as pd
+import os
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 
 window = tk.Tk()
 
