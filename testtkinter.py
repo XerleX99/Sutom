@@ -22,6 +22,7 @@ numbers10str = ["1","2","3","4","5","6","7","8","9","10"]
 numbers10 = [1,2,3,4,5,6,7,8,9,10]
 numbers03 = [0,1,2,3]
 numbers24 = [2,3,4]
+numbers13str = ["1","2","3"]
 numbers26 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
 
 spbox1 = ttk.Combobox(window,values=lettres,width=2)
@@ -164,13 +165,16 @@ def LconImpossible(motEligible2 : list, motEligible3 : list):
     if keep :
       motEligible3.append(word)
 
-def doublons():
+def doublons(motEligible3 : list,motEligible4 : list):
   global dico3
-  max = spbox11.get()
-  print(max)
-  for i in range (0,int(max)):
-    dico3[ListSpBox2[i]] = ListSpBox3[i]
-  print(dico3)
+  max = spbox17.get()
+  print('max :',max)
+  if int(max) in numbers03 :
+    print("in !!!")
+    for i in range (0,int(max)):
+      for word in motEligible3 :
+        if word.count(ListSpBox2[i].get()) >= int(ListSpBox3[i].get()) :
+          motEligible4.append(word)
     
   
   
@@ -179,13 +183,16 @@ def search():
   motEligible1 = []
   motEligible2 = []
   motEligible3 = []
+  motEligible4 = []
   data = openfile()
   LconBienPlace(data,motEligible1)
   LconMalPLace(motEligible1,motEligible2)
   LconImpossible(motEligible2,motEligible3)
-  x = ', '.join(motEligible3)
-  doublons()
-  # Resultlab.config(text=x)
+  if spbox17.get() in numbers13str :
+    doublons(motEligible3,motEligible4)
+  else : 
+    motEligible4 = motEligible3
+  x = ', '.join(motEligible4)
   my_st.config(state=tk.NORMAL)
   my_st.delete('1.0', tk.END)
   my_st.insert("1.0",x)
