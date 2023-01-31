@@ -1,11 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
+import tkinter.scrolledtext as st
 import pandas as pd
 
 window = tk.Tk()
 
 dico1 = {}
 dico2 = {}
+dico3 = {}
 
 
 window.bind('<Escape>',lambda e: window.destroy())
@@ -15,10 +17,11 @@ window.attributes('-topmost', True)
 
 
 window.geometry("650x560")
-lettres = ["a","b","c","d","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+lettres = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 numbers10str = ["1","2","3","4","5","6","7","8","9","10"]
 numbers10 = [1,2,3,4,5,6,7,8,9,10]
-numbers3 = [1,2,3]
+numbers03 = [0,1,2,3]
+numbers24 = [2,3,4]
 numbers26 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
 
 spbox1 = ttk.Combobox(window,values=lettres,width=2)
@@ -34,9 +37,9 @@ spbox10 = ttk.Combobox(window,values=lettres,width=2)
 spbox11 = ttk.Combobox(window,values=lettres,width=2)
 spbox12 = ttk.Combobox(window,values=lettres,width=2)
 spbox13 = ttk.Combobox(window,values=lettres,width=2)
-spbox14 = ttk.Combobox(window,values=numbers3,width=2)
-spbox15 = ttk.Combobox(window,values=numbers3,width=2)
-spbox16 = ttk.Combobox(window,values=numbers3,width=2)
+spbox14 = ttk.Combobox(window,values=numbers24,width=2)
+spbox15 = ttk.Combobox(window,values=numbers24,width=2)
+spbox16 = ttk.Combobox(window,values=numbers24,width=2)
 
 
 entry1 = tk.Entry(window,width=6)
@@ -83,12 +86,16 @@ def buttons(bouton : tk.Button):
     bouton.config(relief='sunken')
 
 def validate():
-  numtemp = spbox11.get()
+  numtemp = spbox17.get()
+  print(numtemp)
   xval = 450
   yval = 150
   yval2 = 175
-  tk.Label( window, text='lettre en double (ou plus) :').place(x=300,y=150)
-  tk.Label( window, text='nombre occurence :').place(x=300,y=175)
+  labdouble = tk.Label( window, text='lettre en double (ou plus) :')
+  labdoublons = tk.Label( window, text='nombre occurence :')
+  if int(numtemp) != 0 :
+    labdouble.place(x=300,y=150)
+    labdoublons.place(x=300,y=175)
   for i in range(0,int(numtemp)):
     ListSpBox2[i].place(x=xval,y=yval)
     ListSpBox3[i].place(x=xval,y=yval2)
@@ -115,13 +122,24 @@ def LconBienPlace(data,motEligible1 : list):
       if keep :
           motEligible1.append(word)
     
-def LconMalPLace(motEligible1 : list, motEligible2 : list): #TODO vérifier que les lettres mal placer sont comprises dans le mot
+def LconMalPLace(motEligible1 : list, motEligible2 : list):
   global numletwordint
   global dico2
+  strings = ""
+  strings2 = ""
   for i in range (0,numletwordint):
     dico2[i] = ListEntry[i].get()
+    strings += ListEntry[i].get()
+
+  for i in strings :
+    if i in lettres and i not in strings2 :
+      strings2 += i
+
   for word in motEligible1 :
     keep = True
+    for k in strings2:
+      if word.count(k) == 0 :
+        keep = False
     for i in range(0,len(word)):
       for j in dico2[i]:
         if j == word[i]:
@@ -138,7 +156,6 @@ def getbadlet():
 
 def LconImpossible(motEligible2 : list, motEligible3 : list):
   letImpo = getbadlet()
-  print('letimpo :',letImpo)
   for word in motEligible2 :
     keep = True
     for let in letImpo:
@@ -147,23 +164,32 @@ def LconImpossible(motEligible2 : list, motEligible3 : list):
     if keep :
       motEligible3.append(word)
 
+def doublons():
+  global dico3
+  max = spbox11.get()
+  print(max)
+  for i in range (0,int(max)):
+    dico3[ListSpBox2[i]] = ListSpBox3[i]
+  print(dico3)
+    
+  
+  
 
 def search():
   motEligible1 = []
   motEligible2 = []
   motEligible3 = []
-  goodlettres = []
-  semigoodlettres = []
-  badlettres = []
   data = openfile()
   LconBienPlace(data,motEligible1)
   LconMalPLace(motEligible1,motEligible2)
   LconImpossible(motEligible2,motEligible3)
-  print('list mot 1 :',motEligible1)
-  print('list mot 2 :',motEligible2)
-  print('list mot 3 :',motEligible3)
   x = ', '.join(motEligible3)
-  Resultlab.config(text=x)
+  doublons()
+  # Resultlab.config(text=x)
+  my_st.config(state=tk.NORMAL)
+  my_st.delete('1.0', tk.END)
+  my_st.insert("1.0",x)
+  my_st.config(state=tk.DISABLED)
   
 
 def openfile():
@@ -245,9 +271,9 @@ ListBoutonLettre = [btnA,btnZ,btnE,btnR,btnT,btnY,btnU,btnI,btnO,btnP,btnQ,btnS,
 
 tk.Label( window, text='Nombre de lettre en double (ou plus) :').place(x=300,y=125)
 
-multipleLettres = [1,2,3]
-spbox11 = ttk.Combobox(window,values=multipleLettres,width=2)
-spbox11.place(x=515,y=125)
+
+spbox17 = ttk.Combobox(window,values=numbers03,width=2)
+spbox17.place(x=515,y=125)
 
 tk.Button(window,text='validate',command=validate).place(x=555,y=122)
 
@@ -255,11 +281,9 @@ tk.Button(window,text='Search',command=search,width=10,height=3).place(x=450,y=2
 
 tk.Label( window, text='Possible solution of the word : ').place(x=5,y=290)
 
+my_st = st.ScrolledText(window,width=77,height=14)
+my_st.place(x=5,y=320)
 
 
-Resultlab = tk.Label( window, text="",width=90,height=15,relief='ridge',wraplengt=600)
-Resultlab.place(x=5,y=320)
-
-
-
+window.resizable = (False, False)
 window.mainloop()
