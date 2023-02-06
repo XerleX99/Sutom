@@ -133,6 +133,7 @@ def LconMalPLace(motEligible1 : list, motEligible2 : list):
   strings = ""
   strings2 = ""
   for i in range (0,numletwordint):
+    print(i)
     dico2[i] = ListEntry[i].get()
     strings += ListEntry[i].get()
 
@@ -145,7 +146,7 @@ def LconMalPLace(motEligible1 : list, motEligible2 : list):
     for k in strings2:
       if word.count(k) == 0 :
         keep = False
-    for i in range(0,len(word)):
+    for i in range(0,numletwordint):
       for j in dico2[i]:
         if j == word[i]:
           keep = False
@@ -205,7 +206,7 @@ def search():
 
 def openfile():
   Flettre = spbox1.get()
-  if Flettre == 10 :
+  if int(numletword) == 10 :
     classer = str (Flettre)+(" classed.xlsx")
     page = str (Flettre)+(" words")
   else :
