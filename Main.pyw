@@ -205,8 +205,12 @@ def search():
 
 def openfile():
   Flettre = spbox1.get()
-  classer = str (Flettre)+(" classed.xlsx")
-  page = str (Flettre)+(" words")+str(numletword)
+  if Flettre == 10 :
+    classer = str (Flettre)+(" classed.xlsx")
+    page = str (Flettre)+(" words")
+  else :
+    classer = str (Flettre)+(" classed.xlsx")
+    page = str (Flettre)+(" words")+str(numletword)
   df = pd.read_excel(classer,str(page))
   return df
 
