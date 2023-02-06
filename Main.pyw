@@ -133,7 +133,6 @@ def LconMalPLace(motEligible1 : list, motEligible2 : list):
   strings = ""
   strings2 = ""
   for i in range (0,numletwordint):
-    print(i)
     dico2[i] = ListEntry[i].get()
     strings += ListEntry[i].get()
 
